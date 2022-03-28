@@ -34,23 +34,35 @@ Er is geen verbetering omdat we geen instructies hebben weg gedaan. Het enige da
 20002000
 
 3.2 Waarom is dit de beste optimisatie? Is er een bepaald soort instructie(s) die een grotere impact hebben?
-1 onmiddelijk erin steken
+Door de waarde 1 er direct in te steken besparen we ons een write statement.
+Als we de input in een register steken maken we onze reads meer efficient.
+We weten dat write meer intensief is dan read, dus een write instuctie minder
+heeft dus ook een veel grotere impact dan de read instuctie efficienter en
+sneller te maken.
+
 
 ################################################################################
 
 4.1 Hoeveel klokcyli verbetering had de 1ste beste optmisatie?
-<#cycli>
+9535000
 
 4.2 Waarom dacht je dit de beste optimisatie was?
-<uitleg>
-<...>
+Door onze uitkomst direct in eax te steken, en de bewerkingen ook direct op eax
+uit te voeren besparen we heel veel moves en dus instructies. Voordien slogen
+we het op in de stack en staken we het op het einde terug in eax.
+We dachten dat dit een grote impact zou hebben omdat we minder reads en writes
+doen. Maar het is nog veel groter dan verwacht, hieruit kunnen we zien dat read
+en write zeer intensieve instructies zijn.
 
 4.3 Hoeveel klokcyli verbetering had de 2de beste optmisatie?
-<#cycli>
+13000
 
 4.4 Waarom dacht je dit de beste optimisatie was?
-<uitleg>
-<...>
+Door de jump enkel uit te voeren als de compare true is besparen we een
+instructie. Voordien jumpte we als het groter was **en** als het kleiner was.
+Nu jumpen we als het kleiner is en anders lopen we gewoon door.
+We dachten dat dit een grote impact zou zijn omdat het een instuctie minder is
+en een duidelijkere flow heeft. Maar de impact is niet zeer groot.
 
 ################################################################################
 
