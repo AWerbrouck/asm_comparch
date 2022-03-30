@@ -3,41 +3,46 @@
 	.globl	narayana
 	.type	narayana, @function
 narayana:
-	pushl   %ebp
-	movl    %esp, %ebp
-  	movl		8(%ebp), %edi
-	pushl		%edi
-	call    narayana_hulp
-	addl    $4, %esp
-  	leave
-  	ret
-
-narayana_hulp:
 .LFB6:
+	.cfi_startproc
+	endbr32
 	pushl	%ebp
+	.cfi_def_cfa_offset 8
+	.cfi_offset 5, -8
 	movl	%esp, %ebp
+	.cfi_def_cfa_register 5
 	subl	$24, %esp
-	movl	$1, %eax
-	cmpl	$3, %edi
-	jl	.L3
+	movl	$0, -20(%ebp)
+	cmpl	$2, 8(%ebp)
+	jg	.L2
+	movl	$1, -20(%ebp)
+	jmp	.L3
 .L2:
+	movl	8(%ebp), %eax
+	subl	$1, %eax
 	subl	$12, %esp
-	movl	%edi, 8(%ebp)
-	subl	$1, %edi
-	pushl	%edi
-	call	narayana
-	movl  8(%ebp), %edi
-	addl	$16, %esp
-	movl	%eax, -8(%ebp)
-	subl	$3, %edi
-	subl	$12, %esp
-	pushl	%edi
+	pushl	%eax
 	call	narayana
 	addl	$16, %esp
-	addl	-8(%ebp), %eax
+	movl	%eax, -16(%ebp)
+	movl	8(%ebp), %eax
+	subl	$3, %eax
+	subl	$12, %esp
+	pushl	%eax
+	call	narayana
+	addl	$16, %esp
+	movl	%eax, -12(%ebp)
+	movl	-16(%ebp), %edx
+	movl	-12(%ebp), %eax
+	addl	%edx, %eax
+	movl	%eax, -20(%ebp)
 .L3:
+	movl	-20(%ebp), %eax
 	leave
+	.cfi_restore 5
+	.cfi_def_cfa 4, 4
 	ret
+	.cfi_endproc
 .LFE6:
 	.size	narayana, .-narayana
 	.section	.rodata
@@ -52,6 +57,7 @@ narayana_hulp:
 main:
 .LFB7:
 	.cfi_startproc
+	endbr32
 	leal	4(%esp), %ecx
 	.cfi_def_cfa 1, 0
 	andl	$-16, %esp
@@ -128,5 +134,21 @@ main:
 	.cfi_endproc
 .LFE7:
 	.size	main, .-main
-	.ident	"GCC: (GNU) 11.2.0"
+	.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
 	.section	.note.GNU-stack,"",@progbits
+	.section	.note.gnu.property,"a"
+	.align 4
+	.long	 1f - 0f
+	.long	 4f - 1f
+	.long	 5
+0:
+	.string	 "GNU"
+1:
+	.align 4
+	.long	 0xc0000002
+	.long	 3f - 2f
+2:
+	.long	 0x3
+3:
+	.align 4
+4:

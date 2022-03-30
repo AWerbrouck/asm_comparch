@@ -71,28 +71,27 @@ en een duidelijkere flow heeft. Maar de impact is niet zeer groot.
 ################################################################################
 
 6.1 Hoe worden het argument "n" doorgegeven in zijn 64-bit versie?
-<antwoord>
+via registers
 
 6.2 Hoe worden het argument "n" doorgegeven in zijn 32-bit versie?
-<antwoord>
+via de stack
 
 6.3 Wat zou de impact zijn op uitvoeringstijd? Waarom is dit zo?
-<uitleg>
-<...>
+Registers zijn efficienter dan de stack. Dus het zal sneller zijn om met de
+64bit conventies te werken.
 
 ################################################################################
 
 7.1 Hoeveel klokcyli verbetering heb je dankzij de 64-bit oproepconventie?
-<#cycli>
+4797000
 
 ################################################################################
 
 8.1 Hoeveel klokcyli verbetering had de 1ste beste optmisatie?
-<#cycli>
+48 000
 
 8.2 Waarom dacht je dit de beste optimisatie was?
-<uitleg>
-<...>
+We hebben alle nuttelose esp operaties weggedaan.
 
 8.3 Hoeveel klokcyli verbetering had de 2de beste optmisatie?
 <#cycli>
